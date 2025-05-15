@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg7hbefrpognr"]
+
+[ext_resource type="PackedScene" uid="uid://dvnmetmby5ntk" path="res://scenes/zombie/zombie.tscn" id="1_g8byq"]
+[ext_resource type="PackedScene" uid="uid://bd4e5516x4jok" path="res://scenes/zombie/player_dummy.tscn" id="2_mjwjr"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Zombie" parent="." instance=ExtResource("1_g8byq")]
+position = Vector2(762, 195)
+script = null
+
+[node name="Zombie2" parent="." instance=ExtResource("1_g8byq")]
+position = Vector2(844, 440)
+script = null
+
+[node name="Zombie3" parent="." instance=ExtResource("1_g8byq")]
+position = Vector2(565, 128)
+script = null
+
+[node name="Zombie4" parent="." instance=ExtResource("1_g8byq")]
+position = Vector2(640, 517)
+script = null
+
+[node name="Zombie5" parent="." instance=ExtResource("1_g8byq")]
+position = Vector2(691, 345)
+script = null
+
+[node name="Player" parent="." instance=ExtResource("2_mjwjr")]
+position = Vector2(362, 322)
+script = null

@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2chl8ho4v7xl"]
+
+[ext_resource type="Texture2D" uid="uid://bh4dg6nml1fbt" path="res://assets/flashlight.png" id="1_08jxa"]
+[ext_resource type="Script" path="res://scripts/zombie/light.gd" id="2_2vo4n"]
+
+[node name="Flashlight" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-16, 4)
+texture = ExtResource("1_08jxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 156, 125)
+
+[node name="Light" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2_2vo4n")
+
+[node name="Sprite2D" type="Sprite2D" parent="Light"]
+position = Vector2(303, 3)
+texture = ExtResource("1_08jxa")
+region_enabled = true
+region_rect = Rect2(156, 0, 484, 128)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Light"]
+polygon = PackedVector2Array(62, -19, 517, -55, 521, 56, 61, 25)
