@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvnmetmby5ntk"]
+
+[ext_resource type="Texture2D" uid="uid://dq1r7baaoud0a" path="res://icon.svg" id="1_4oorn"]
+[ext_resource type="Script" path="res://scripts/zombie/zombie.gd" id="1_o52xq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3w12i"]
+size = Vector2(56, 56)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cvpua"]
+radius = 480.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lu6vi"]
+radius = 216.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwkfa"]
+size = Vector2(64, 64)
+
+[node name="Zombie" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_o52xq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3w12i")
+
+[node name="ChaseRange" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseRange"]
+shape = SubResource("CircleShape2D_cvpua")
+debug_color = Color(0.580392, 0.580392, 0.580392, 0.12549)
+
+[node name="SightRange" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SightRange"]
+shape = SubResource("CircleShape2D_lu6vi")
+debug_color = Color(0.580392, 0.580392, 0.580392, 0.12549)
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_cwkfa")
+debug_color = Color(0.828038, 0.381471, 0.284578, 0.42)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(0.43227, 0.817506, 0.294181, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_4oorn")
+
+[node name="FleeTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="body_exited" from="ChaseRange" to="." method="_on_chase_range_body_exited"]
+[connection signal="body_entered" from="SightRange" to="." method="_on_sight_range_body_entered"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="timeout" from="FleeTimer" to="." method="_on_flee_timer_timeout"]
