@@ -1,6 +1,7 @@
-[gd_scene load_steps=77 format=3 uid="uid://dljnl4e74u0mn"]
+[gd_scene load_steps=78 format=3 uid="uid://dljnl4e74u0mn"]
 
 [ext_resource type="Texture2D" uid="uid://g8g6w6mfu3y4" path="res://assets/Animation Sprite Sheets (PNG)/LeftPassiveIdleReaper-Sheet.png" id="1"]
+[ext_resource type="Script" path="res://scripts/reaper/reaper.gd" id="1_qxkvb"]
 [ext_resource type="Texture2D" uid="uid://cm6ox1st25tkv" path="res://assets/Animation Sprite Sheets (PNG)/HostileAttackReaper-Sheet.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://bctdmav3mbgfr" path="res://assets/Animation Sprite Sheets (PNG)/HolsterWeaponReaper-Sheet.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://3mk5cdyygqm3" path="res://assets/Animation Sprite Sheets (PNG)/PassiveIdleReaper-Sheet.png" id="4"]
@@ -499,6 +500,7 @@ polygon = PackedVector2Array(1.86499, -15.5538, 5.89169, -15.1792, 8.70102, -11.
 [node name="Reaper" type="CharacterBody2D"]
 position = Vector2(155, 66)
 collision_mask = 12
+script = ExtResource("1_qxkvb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.420925, 5.75262)
@@ -508,10 +510,9 @@ shape = SubResource("1")
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("64")
 animation = &"kill"
-frame_progress = 0.547902
+frame_progress = 0.740554
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite"]
-visible = false
 occluder = SubResource("65")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -526,9 +527,7 @@ shape = SubResource("66")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11")
 
-[node name="PetrifyTimer" type="Timer" parent="."]
+[node name="AttackCooldown" type="Timer" parent="."]
 
-[node name="AttackTimer" type="Timer" parent="."]
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D2_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D2_body_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
