@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2chl8ho4v7xl"]
+[gd_scene load_steps=5 format=3 uid="uid://b2chl8ho4v7xl"]
 
-[ext_resource type="Texture2D" uid="uid://bh4dg6nml1fbt" path="res://assets/flashlight.png" id="1_08jxa"]
+[ext_resource type="Texture2D" uid="uid://d3yarr7m7ib3r" path="res://assets/flashlight.png" id="1_08jxa"]
+[ext_resource type="Texture2D" uid="uid://g5bxdg8qt8o6" path="res://assets/3 Dude_Monster/Dude_Monster.png" id="1_dbmdp"]
 [ext_resource type="Script" path="res://scripts/zombie/light.gd" id="2_2vo4n"]
+[ext_resource type="Texture2D" uid="uid://cv74d3m8qubq0" path="res://assets/flashlight_light2d.png" id="3_sefua"]
 
 [node name="Flashlight" type="Node2D"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(629, 57)
+scale = Vector2(61.35, 61.35)
+texture = ExtResource("1_dbmdp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-16, 4)
@@ -12,15 +20,14 @@ region_enabled = true
 region_rect = Rect2(0, 0, 156, 125)
 
 [node name="Light" type="Area2D" parent="."]
-collision_layer = 4
+collision_layer = 2
 collision_mask = 4
 script = ExtResource("2_2vo4n")
 
-[node name="Sprite2D" type="Sprite2D" parent="Light"]
-position = Vector2(303, 3)
-texture = ExtResource("1_08jxa")
-region_enabled = true
-region_rect = Rect2(156, 0, 484, 128)
+[node name="PointLight2D" type="PointLight2D" parent="Light"]
+position = Vector2(584, 7)
+scale = Vector2(1.39, 1.465)
+texture = ExtResource("3_sefua")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Light"]
-polygon = PackedVector2Array(62, -19, 517, -55, 521, 56, 61, 25)
+polygon = PackedVector2Array(62, -29, 824, -239, 935, -224, 1047, -162, 1094, -68, 1108, 1, 1086, 104, 1020, 190, 923, 240, 819, 252, 60, 27)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dvnmetmby5ntk"]
 
-[ext_resource type="Texture2D" uid="uid://dq1r7baaoud0a" path="res://icon.svg" id="1_4oorn"]
+[ext_resource type="Texture2D" uid="uid://ust7nlqrr68u" path="res://icon.svg" id="1_4oorn"]
 [ext_resource type="Script" path="res://scripts/zombie/zombie.gd" id="1_o52xq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3w12i"]
@@ -16,14 +16,15 @@ radius = 216.0
 size = Vector2(64, 64)
 
 [node name="Zombie" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_o52xq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3w12i")
 
 [node name="ChaseRange" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseRange"]
@@ -31,7 +32,7 @@ shape = SubResource("CircleShape2D_cvpua")
 debug_color = Color(0.580392, 0.580392, 0.580392, 0.12549)
 
 [node name="SightRange" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SightRange"]
@@ -40,7 +41,7 @@ debug_color = Color(0.580392, 0.580392, 0.580392, 0.12549)
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("RectangleShape2D_cwkfa")

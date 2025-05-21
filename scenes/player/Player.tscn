@@ -306,8 +306,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
-collision_layer = 2
-collision_mask = 2
+collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_pcyhf")
 
@@ -359,3 +358,4 @@ sprint_speed = 600
 flashlight = NodePath("../../../Body/Flashlight")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
