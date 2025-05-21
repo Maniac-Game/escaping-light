@@ -520,13 +520,13 @@ position = Vector2(0, 1)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("64")
 animation = &"kill"
-frame_progress = 0.511153
+frame_progress = 0.655771
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite"]
 visible = false
 occluder = SubResource("65")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStream2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11")
 
 [node name="AttackTimer" type="Timer" parent="."]

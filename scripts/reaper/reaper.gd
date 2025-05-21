@@ -10,6 +10,7 @@ extends Enemy
 @onready var animated_sprite = $AnimatedSprite
 @onready var hitbox = $HitBox
 @onready var petrification_timer = $PetrifiedTimer
+@onready var attack_sound = $AudioStream2D
 
 var target: CharacterBody2D
 var is_attacking: bool = false
@@ -38,6 +39,8 @@ func attack_target(delta):
 			is_attacking = true
 			#animated_sprite.flip_h = true
 			animated_sprite.play("kill")
+			if !attack_sound.playing:
+				attack_sound.play()
 			# Deal damage to the player
 			if target.has_method("take_damage"):
 				target.take_damage(attack_damage)
