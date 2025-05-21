@@ -17,6 +17,7 @@ var is_petrified: bool = false
 var petrification_start_time: float = 0
 var current_health: int = max_health
 var is_facing_left: bool = true
+var dead: bool = false
 
 func _ready() -> void:
 	animated_sprite.play("idleLeft")
@@ -62,24 +63,26 @@ func play_idle_animation():
 		animated_sprite.play("idleRight")
 
 func _physics_process(delta: float) -> void:
-	if is_petrified:
-		var elapsed_time = Time.get_ticks_msec() / 1000.0 - petrification_start_time
-		if elapsed_time > 0:
-			current_health -= petrification_damage_per_second * delta
-			if current_health <= 0:
-				die()
-			# Optional debug
-			print_debug("Health: ", current_health)
-	else:
-		if target != null:
-			attack_target(delta)
-
-			if !is_attacking:
-				chase_target(delta)
+	if !dead:
+		if is_petrified:
+			var elapsed_time = Time.get_ticks_msec() / 1000.0 - petrification_start_time
+			if elapsed_time > 0:
+				current_health -= petrification_damage_per_second * delta
+				if current_health <= 0 && !dead:
+					dead = true
+					die()
+				# Optional debug
+				print_debug("Health: ", current_health)
 		else:
-			chase_target(delta)
+			if target != null:
+				attack_target(delta)
 
-	move_and_slide()
+				if !is_attacking:
+					chase_target(delta)
+			else:
+				chase_target(delta)
+
+		move_and_slide()
 
 func chase_target(delta: float):
 	if target != null:
@@ -92,8 +95,9 @@ func chase_target(delta: float):
 
 func die():
 	print_debug("Reaper is dying...")
+	$HitBox/CollisionShape2D.disabled = true
+	animated_sprite.animation_finished.connect(queue_free)
 	animated_sprite.play("dead")
-	queue_free()
 
 func _on_sight_range_body_entered(body: Node2D) -> void:
 	if body is Player:

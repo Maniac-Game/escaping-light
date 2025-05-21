@@ -285,7 +285,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("25")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead",
 "speed": 6.0
 }, {
@@ -507,7 +507,8 @@ size = Vector2(64, 83)
 
 [node name="Reaper" type="CharacterBody2D"]
 position = Vector2(273, 135)
-collision_mask = 12
+collision_layer = 5
+collision_mask = 11
 script = ExtResource("1_qxkvb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -519,8 +520,7 @@ shape = SubResource("1")
 position = Vector2(0, 1)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("64")
-animation = &"kill"
-frame_progress = 0.511153
+animation = &"hostileLeft"
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite"]
 visible = false
@@ -532,7 +532,7 @@ stream = ExtResource("11")
 [node name="AttackTimer" type="Timer" parent="."]
 
 [node name="ChaseRange" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseRange"]
@@ -540,7 +540,7 @@ shape = SubResource("CircleShape2D_d68ib")
 debug_color = Color(0.580392, 0.580392, 0.580392, 0.12549)
 
 [node name="SightRange" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SightRange"]
@@ -549,7 +549,7 @@ debug_color = Color(0.580392, 0.580392, 0.580392, 0.12549)
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, 0.5)
@@ -575,5 +575,5 @@ wait_time = 3.0
 [connection signal="area_exited" from="HitBox" to="." method="_on_hit_box_area_exited"]
 [connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="area_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
-[connection signal="timeout" from="PetrifiedTimer" to="." method="_on_petrification_timer_timeout"]
 [connection signal="timeout" from="PetrifiedTimer" to="." method="_on_flee_timer_timeout"]
+[connection signal="timeout" from="PetrifiedTimer" to="." method="_on_petrification_timer_timeout"]
