@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b2chl8ho4v7xl"]
 
-[ext_resource type="Texture2D" uid="uid://bh4dg6nml1fbt" path="res://assets/flashlight.png" id="1_08jxa"]
+[ext_resource type="Texture2D" uid="uid://d3yarr7m7ib3r" path="res://assets/flashlight.png" id="1_08jxa"]
 [ext_resource type="Script" path="res://scripts/zombie/light.gd" id="2_2vo4n"]
 
 [node name="Flashlight" type="Node2D"]
