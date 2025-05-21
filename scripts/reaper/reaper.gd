@@ -1,147 +1,113 @@
-extends CharacterBody2D
+extends Enemy
 
-enum State {
-	IDLE,
-	CHASE,
-	ATTACK,
-	PETRIFIED,
-	DEAD
-}
+@export var speed: float = 80
+@export var petrification_damage_per_second: float = 5
+@export var attack_radius: float = 100
+@export var attack_damage: int = 20
+@export var deceleration_rate: float = 2
+@export var max_health: int = 100
 
-@export var speed: float = 150.0
-@export var attack_damage: float = 10.0
-@export var attack_cooldown: float = 1.0
-@export var light_damage_per_second: float = 15.0
-@export var detection_range: float = 300.0
-@export var attack_range: float = 50.0
+@onready var animated_sprite = $AnimatedSprite
+@onready var hitbox = $HitBox
+@onready var petrification_timer = $PetrifiedTimer
 
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
-@onready var audio_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
-@onready var area_2d: Area2D = $Area2D
-@onready var collision_shape: CollisionShape2D = $Area2D/CollisionShape2D
-
-var current_state = State.IDLE
-var player_ref: Node2D = null
-var health: float = 100.0
-var time_in_light: float = 0.0
-var can_attack: bool = true
+var target: CharacterBody2D
+var is_attacking: bool = false
+var is_petrified: bool = false
+var petrification_start_time: float = 0
+var current_health: int = max_health
 var is_facing_left: bool = true
 
-func _ready():
+func _ready() -> void:
 	animated_sprite.play("idleLeft")
 
-func _physics_process(delta):
-	match current_state:
-		State.IDLE:
-			handle_idle()
-		State.CHASE:
-			handle_chase(delta)
-		State.ATTACK:
-			handle_attack()
-		State.PETRIFIED:
-			handle_petrified(delta)
-		State.DEAD:
-			handle_dead()
-	
-	move_and_slide()
+func enter_petrification():
+	is_petrified = true
+	velocity = Vector2.ZERO
+	petrification_timer.start()
+	animated_sprite.play("idleLeft" if is_facing_left else "idleRight")
 
-func handle_idle():
-	if is_facing_left:
-		animated_sprite.play("idleLeft")
+func exit_petrification():
+	is_petrified = false
+	petrification_timer.stop()
+
+func attack_target(delta):
+	if target != null:
+		var distance_to_player = (target.global_position - global_position).length()
+		if distance_to_player <= attack_radius:
+			is_attacking = true
+			#animated_sprite.flip_h = true
+			animated_sprite.play("kill")
+			# Deal damage to the player
+			if target.has_method("take_damage"):
+				target.take_damage(attack_damage)
+		else:
+			is_attacking = false
+			play_idle_animation()
 	else:
-		animated_sprite.play("idleRight")
-	
-	if player_ref and global_position.distance_to(player_ref.global_position) < detection_range:
-		current_state = State.CHASE
+		is_attacking = false
 
-func handle_chase(_delta):
-	if not player_ref:
-		current_state = State.IDLE
-		return
-	
-	var direction = (player_ref.global_position - global_position).normalized()
-	
+func update_facing_direction(direction: Vector2):
 	if direction.x < 0:
-		animated_sprite.play("walkLeft")
+		animated_sprite.play("hostileLeft")
 		is_facing_left = true
 	else:
-		animated_sprite.play("walkRight")
-		is_facing_left = false
-	
-	velocity = direction * speed
-	
-	if global_position.distance_to(player_ref.global_position) <= attack_range:
-		current_state = State.ATTACK
-
-func handle_attack():
-	if not player_ref or global_position.distance_to(player_ref.global_position) > attack_range:
-		current_state = State.CHASE
-		return
-	
-	if is_facing_left:
-		animated_sprite.play("kill")
-	else:
 		animated_sprite.play("hostileRight")
+		is_facing_left = false
 
-	if can_attack:
-		attack_player()
-
-func attack_player():
-	if player_ref and player_ref.has_method("take_damage"):
-		player_ref.take_damage(attack_damage)
-		can_attack = false
-		$AttackCooldown.start(attack_cooldown)
-		audio_player.play()
-
-func handle_petrified(delta):
-	velocity = Vector2.ZERO
-	
+func play_idle_animation():
 	if is_facing_left:
 		animated_sprite.play("idleLeft")
 	else:
 		animated_sprite.play("idleRight")
-	
-	time_in_light += delta
-	if time_in_light >= 1.0:
-		take_damage(light_damage_per_second)
-		time_in_light = 0.0
-	
-	if not is_in_light():
-		current_state = State.CHASE
-		time_in_light = 0.0
 
-func handle_dead():
-	animated_sprite.play("dead")
-	set_physics_process(false)
-	collision_shape.disabled = true
+func _physics_process(delta: float) -> void:
+	if is_petrified:
+		var elapsed_time = Time.get_ticks_msec() / 1000.0 - petrification_start_time
+		if elapsed_time > 0:
+			current_health -= petrification_damage_per_second * delta
+			if current_health <= 0:
+				die()
+			# Optional debug
+			print_debug("Health: ", current_health)
+	else:
+		if target != null:
+			attack_target(delta)
 
-func take_damage(amount: float):
-	health -= amount
-	if health <= 0:
-		die()
+			if !is_attacking:
+				chase_target(delta)
+		else:
+			chase_target(delta)
+
+	move_and_slide()
+
+func chase_target(delta: float):
+	if target != null:
+		var direction = (target.global_position - global_position).normalized()
+		velocity = direction * speed
+		update_facing_direction(direction)
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, speed * deceleration_rate * delta)
+		play_idle_animation()
 
 func die():
-	current_state = State.DEAD
-	# Additional death handling (particles, sound, etc.)
+	print_debug("Reaper is dying...")
+	animated_sprite.play("dead")
+	queue_free()
 
-func is_in_light() -> bool:
-	return false
+func _on_sight_range_body_entered(body: Node2D) -> void:
+	if body is Player:
+		target = body
 
-func _on_Area2D_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		player_ref = body
-		if current_state == State.IDLE:
-			current_state = State.CHASE
+func _on_chase_range_body_exited(body: Node2D) -> void:
+	if body is Player:
+		target = null
 
-func _on_Area2D_body_exited(body: Node2D) -> void:
-	if body == player_ref:
-		player_ref = null
-		current_state = State.IDLE
+func _on_hit_box_area_entered(area: Area2D) -> void:
+	if area is Light and !is_petrified:
+		enter_petrification()
+		petrification_start_time = Time.get_ticks_msec() / 1000.0
 
-func _on_attack_cooldown_timeout():
-	can_attack = true
-
-func _on_light_detected(_light_source):
-	if current_state != State.DEAD:
-		current_state = State.PETRIFIED
-		time_in_light = 0.0
+func _on_hit_box_area_exited(area: Area2D) -> void:
+	if area is Light and is_petrified:
+		exit_petrification()
