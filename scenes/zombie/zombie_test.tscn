@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cg7hbefrpognr"]
+
+[ext_resource type="PackedScene" uid="uid://dvnmetmby5ntk" path="res://scenes/zombie/zombie.tscn" id="1_g8byq"]
+[ext_resource type="PackedScene" uid="uid://bd4e5516x4jok" path="res://scenes/zombie/player_dummy.tscn" id="2_mjwjr"]
+[ext_resource type="PackedScene" uid="uid://dljnl4e74u0mn" path="res://scenes/reaper/reaper.tscn" id="3_2we2v"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_mjwjr")]
+position = Vector2(180, 318)
+
+[node name="Zombie" parent="." instance=ExtResource("1_g8byq")]
+position = Vector2(800, 61)
+
+[node name="Zombie2" parent="." instance=ExtResource("1_g8byq")]
+position = Vector2(1013, 523)
+
+[node name="Zombie3" parent="." instance=ExtResource("1_g8byq")]
+position = Vector2(1068, 228)
+
+[node name="Zombie4" parent="." instance=ExtResource("1_g8byq")]
+position = Vector2(1445, 107)
+
+[node name="Zombie5" parent="." instance=ExtResource("1_g8byq")]
+position = Vector2(1430, 366)
+
+[node name="Reaper" parent="." instance=ExtResource("3_2we2v")]
+position = Vector2(735, 510)

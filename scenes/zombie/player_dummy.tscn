@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bd4e5516x4jok"]
+
+[ext_resource type="Script" path="res://scripts/zombie/player.gd" id="1_rmfte"]
+[ext_resource type="Texture2D" uid="uid://ust7nlqrr68u" path="res://icon.svg" id="2_6acc7"]
+[ext_resource type="PackedScene" uid="uid://b2chl8ho4v7xl" path="res://scenes/zombie/flashlight_dummy.tscn" id="3_cccyf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r38bc"]
+size = Vector2(56, 56)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 3
+script = ExtResource("1_rmfte")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_r38bc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_6acc7")
+
+[node name="Flashlight" parent="." instance=ExtResource("3_cccyf")]
+position = Vector2(6, 13)
+scale = Vector2(0.5, 0.5)
+
+[node name="Camera2D" type="Camera2D" parent="."]
