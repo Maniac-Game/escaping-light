@@ -10,6 +10,8 @@ extends Enemy
 @onready var animated_sprite = $AnimatedSprite
 @onready var hitbox = $HitBox
 @onready var petrification_timer = $PetrifiedTimer
+@onready var attack_sound = $AudioStreamPlayer2D
+@onready var audio_die_reaper = $AudioDieReaper
 
 var target: CharacterBody2D
 var is_attacking: bool = false
@@ -43,6 +45,8 @@ func attack_target(delta):
 				flipped = true
 				$AttackArea.scale.x = -1
 			animated_sprite.play("kill")
+			if !attack_sound.playing:
+				attack_sound.play()
 			$AttackArea/CollisionShape2D.disabled = false
 			# Deal damage to the player
 			if target.has_method("take_damage"):
@@ -112,8 +116,10 @@ func chase_target(delta: float):
 func die():
 	print_debug("Reaper is dying...")
 	$HitBox/CollisionShape2D.disabled = true
-	animated_sprite.animation_finished.connect(queue_free)
+	audio_die_reaper.finished.connect(queue_free)
+	audio_die_reaper.play()
 	animated_sprite.play("dead")
+
 
 func _on_sight_range_body_entered(body: Node2D) -> void:
 	if body is Player:
