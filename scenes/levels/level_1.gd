@@ -18,11 +18,13 @@ func _on_win_trigger_body_entered(body: Node2D) -> void:
 		#trigger win
 		print("Win")
 		player.launch_winscreen()
-		await get_tree().create_timer(1).timeout
+		$CanvasLayer/InGameGUI.hide()
+		await get_tree().create_timer(2).timeout
 		$CanvasLayer/WinScreen.show()
 		pass
 
 func launch_losescreen():
 	await get_tree().create_timer(1).timeout
+	$CanvasLayer/InGameGUI.hide()
 	$CanvasLayer/LoseScreen.show()
 	
