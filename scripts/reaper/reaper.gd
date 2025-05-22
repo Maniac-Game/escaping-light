@@ -18,6 +18,7 @@ var petrification_start_time: float = 0
 var current_health: int = max_health
 var is_facing_left: bool = true
 var dead: bool = false
+var flipped:bool = false
 
 func _ready() -> void:
 	animated_sprite.play("idleLeft")
@@ -37,16 +38,30 @@ func attack_target(delta):
 		var distance_to_player = (target.global_position - global_position).length()
 		if distance_to_player <= attack_radius:
 			is_attacking = true
-			#animated_sprite.flip_h = true
+			if (target.global_position - global_position).x < 0:
+				animated_sprite.flip_h = true
+				flipped = true
+				$AttackArea.scale.x = -1
 			animated_sprite.play("kill")
+			$AttackArea/CollisionShape2D.disabled = false
 			# Deal damage to the player
 			if target.has_method("take_damage"):
 				target.take_damage(attack_damage)
 		else:
+			$AttackArea/CollisionShape2D.disabled = true
+			if flipped:
+				animated_sprite.flip_h = false
+				flipped = false
+				$AttackArea.scale.x = 1
 			is_attacking = false
 			play_idle_animation()
 	else:
+		$AttackArea/CollisionShape2D.disabled = true
 		is_attacking = false
+		if flipped:
+			animated_sprite.flip_h = false
+			flipped = false
+			$AttackArea.scale.x = 1
 
 func update_facing_direction(direction: Vector2):
 	if direction.x < 0:
@@ -85,6 +100,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 func chase_target(delta: float):
+	$AttackArea/CollisionShape2D.disabled = true
 	if target != null:
 		var direction = (target.global_position - global_position).normalized()
 		velocity = direction * speed

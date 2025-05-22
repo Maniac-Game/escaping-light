@@ -430,9 +430,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("21")
 }],
-"loop": true,
+"loop": false,
 "name": &"kill",
-"speed": 10.0
+"speed": 40.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -507,8 +507,9 @@ size = Vector2(64, 83)
 
 [node name="Reaper" type="CharacterBody2D"]
 position = Vector2(273, 135)
-collision_layer = 5
-collision_mask = 11
+collision_layer = 133
+collision_mask = 139
+motion_mode = 1
 script = ExtResource("1_qxkvb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -520,7 +521,7 @@ shape = SubResource("1")
 position = Vector2(0, 1)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("64")
-animation = &"hostileLeft"
+animation = &"kill"
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite"]
 visible = false
@@ -557,18 +558,17 @@ shape = SubResource("RectangleShape2D_80cyl")
 debug_color = Color(0.828038, 0.381471, 0.284578, 0.42)
 
 [node name="AttackArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(-57, 0)
+position = Vector2(58, 0)
 shape = SubResource("RectangleShape2D_80cyl")
+disabled = true
 
 [node name="PetrifiedTimer" type="Timer" parent="."]
 wait_time = 3.0
 
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="body_exited" from="ChaseRange" to="." method="_on_chase_range_body_exited"]
 [connection signal="body_entered" from="SightRange" to="." method="_on_sight_range_body_entered"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
