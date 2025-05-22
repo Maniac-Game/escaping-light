@@ -6,6 +6,7 @@ func _ready() -> void:
 	$CanvasLayer/LoseScreen.hide()
 	$CanvasLayer/InGameGUI.show()
 	$AudioStreamPlayer2D.play()
+	$AnimatedBattery.play("default")
 	
 func _process(delta: float) -> void:
 	if player:
