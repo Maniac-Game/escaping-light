@@ -1,11 +1,26 @@
 [gd_scene load_steps=3 format=3 uid="uid://curenhqhxrmjx"]
 
 [ext_resource type="PackedScene" uid="uid://b6ajiwhpjsmv" path="res://scenes/player/Player.tscn" id="1_esem1"]
-[ext_resource type="PackedScene" uid="uid://mfeub1q560e7" path="res://scenes/ghost/Ghost.tscn" id="2_k7tlv"]
+[ext_resource type="PackedScene" uid="uid://cnkqk64joekkr" path="res://scenes/ghost/Ghost.tscn" id="2_k7tlv"]
 
 [node name="Level" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2438.5
+offset_top = -1190.5
+offset_right = 2561.5
+offset_bottom = 1209.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.336608, 0.336608, 0.336608, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_esem1")]
 position = Vector2(-4, 87)
 
 [node name="Ghost" parent="." instance=ExtResource("2_k7tlv")]
+position = Vector2(220, 88)

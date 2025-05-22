@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://mfeub1q560e7"]
+[gd_scene load_steps=49 format=3 uid="uid://cnkqk64joekkr"]
 
 [ext_resource type="Script" path="res://scripts/ghost/ghost.gd" id="1_wsow8"]
 [ext_resource type="Texture2D" uid="uid://cc4locqk1ccus" path="res://assets/Ghost/Attack.png" id="2_db2a3"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cxhy6qq3c2bsd" path="res://assets/Ghost/Fly.png" id="4_wxujm"]
 [ext_resource type="Texture2D" uid="uid://dacm8by2ge2mt" path="res://assets/Ghost/Hit.png" id="5_snvqm"]
 [ext_resource type="Texture2D" uid="uid://vc8lgqtbs6fc" path="res://assets/Ghost/Idle.png" id="6_g1ye8"]
+[ext_resource type="AudioStream" uid="uid://b80gxtbyw5o3b" path="res://assets/Ghost/467701__lucasduff__monster-bite.wav" id="7_mw3bc"]
+[ext_resource type="AudioStream" uid="uid://cebp6mlcnssyr" path="res://assets/Ghost/350920__cabled_mess__hurt_c_06.wav" id="8_3om7s"]
+[ext_resource type="AudioStream" uid="uid://bp4tovaeoxgqy" path="res://assets/Ghost/350985__cabled_mess__lose_c_02.wav" id="8_fbkcq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jpcl6"]
 atlas = ExtResource("2_db2a3")
@@ -214,7 +217,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m3gws")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 7.0
 }, {
@@ -245,7 +248,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ayfs8")
 }],
-"loop": true,
+"loop": false,
 "name": &"hit",
 "speed": 5.0
 }, {
@@ -273,29 +276,73 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_r1abd"]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_afwch"]
-radius = 11.0
-height = 26.0
+radius = 13.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_keumr"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sr1j1"]
+radius = 350.0
 
 [node name="Ghost" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_wsow8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_x4t0f")
 animation = &"attack"
+frame = 7
+frame_progress = 1.0
 
-[node name="Hurtbox" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 0)
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_r1abd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_afwch")
 disabled = true
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="HitboxRight" type="Area2D" parent="."]
+position = Vector2(0, 3)
+collision_layer = 255
+collision_mask = 255
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(-22, 3)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxRight"]
+position = Vector2(18, 0)
 shape = SubResource("CircleShape2D_keumr")
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="attack_finished"]
+[node name="HitboxLeft" type="Area2D" parent="."]
+position = Vector2(0, 3)
+collision_layer = 255
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxLeft"]
+position = Vector2(-18, 0)
+shape = SubResource("CircleShape2D_keumr")
+
+[node name="BiteSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_mw3bc")
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_3om7s")
+pitch_scale = 1.41
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_fbkcq")
+volume_db = 2.0
+
+[node name="InvincibilityWindow" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sr1j1")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="animation_finished"]
+[connection signal="timeout" from="InvincibilityWindow" to="." method="invincible_over"]
