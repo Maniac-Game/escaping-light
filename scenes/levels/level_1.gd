@@ -4,6 +4,7 @@ extends Node2D
 func _ready() -> void:
 	$CanvasLayer/WinScreen.hide()
 	$CanvasLayer/LoseScreen.hide()
+	$CanvasLayer/InGameGUI.show()
 	
 func _process(delta: float) -> void:
 	if player:

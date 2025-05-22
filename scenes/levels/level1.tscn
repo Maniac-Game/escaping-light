@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://clr2lcrgseeoc"]
+[gd_scene load_steps=11 format=4 uid="uid://clr2lcrgseeoc"]
 
 [ext_resource type="PackedScene" uid="uid://b6ajiwhpjsmv" path="res://scenes/player/Player.tscn" id="1_258ay"]
 [ext_resource type="Script" path="res://scenes/levels/level_1.gd" id="1_chrte"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cdjext86d1w23" path="res://assets/winarealight.png" id="5_0c125"]
 [ext_resource type="PackedScene" uid="uid://bup5uqsi64vt4" path="res://scenes/gui/LoseScreen.tscn" id="6_u8bfl"]
 [ext_resource type="PackedScene" uid="uid://dqc6haikmo2w2" path="res://scenes/gui/WinScreen.tscn" id="7_u5pvq"]
+[ext_resource type="PackedScene" uid="uid://2wtjr1rpsdli" path="res://scenes/gui/InGameGUI.tscn" id="8_n6q6e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wwpk"]
 size = Vector2(848, 725)
@@ -139,5 +140,8 @@ visible = false
 
 [node name="WinScreen" parent="CanvasLayer" instance=ExtResource("7_u5pvq")]
 visible = false
+
+[node name="InGameGUI" parent="CanvasLayer" instance=ExtResource("8_n6q6e")]
+texture_filter = 1
 
 [connection signal="body_entered" from="WinTrigger" to="." method="_on_win_trigger_body_entered"]
