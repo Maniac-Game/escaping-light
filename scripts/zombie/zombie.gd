@@ -14,10 +14,10 @@ enum AttackPhase {
 	END
 }
 
-@export var speed: float = 80
+@export var speed: float = 100
 @export var dash_multiplier = 3.0
 @export var flee_multiplier = 2.0
-@export var light_damage: float = 20.0
+@export var light_damage: float = 33.4
 
 @onready var sprite = $AnimatedSprite2D
 
@@ -133,6 +133,8 @@ func die():
 func _on_sight_range_body_entered(body: Node2D) -> void:
 	if body is Player:
 		target = body
+		if current_state == State.IDLE:
+			current_state = State.ATTACK
 
 
 func _on_chase_range_body_exited(body: Node2D) -> void:

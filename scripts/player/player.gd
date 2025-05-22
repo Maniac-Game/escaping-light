@@ -18,7 +18,7 @@ func get_state() -> State:
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.name == "AttackArea":
 		print_debug("Health: ", health)
-		health -= 25
+		health -= 20
 		if health <= 0:
 			$Hitbox/CollisionShape2D.disabled = true
 			var current_state = animation_state_machine.current_state

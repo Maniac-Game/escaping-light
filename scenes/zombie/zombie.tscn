@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dvnmetmby5ntk"]
+[gd_scene load_steps=58 format=3 uid="uid://dvnmetmby5ntk"]
 
 [ext_resource type="Script" path="res://scripts/zombie/zombie.gd" id="1_ly87n"]
 [ext_resource type="Texture2D" uid="uid://fuy6k8nok0nm" path="res://assets/Zombie.png" id="3_gmjeq"]
@@ -10,10 +10,13 @@ size = Vector2(56, 80)
 radius = 216.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a1eww"]
-radius = 480.0
+radius = 560.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oxgvw"]
 size = Vector2(64, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pfiny"]
+size = Vector2(72, 88)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qu7gq"]
 atlas = ExtResource("3_gmjeq")
@@ -436,6 +439,14 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_oxgvw")
 debug_color = Color(0.828038, 0.381471, 0.284578, 0.42)
 
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("RectangleShape2D_pfiny")
+debug_color = Color(1, 1, 1, 0.42)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -12)
@@ -449,7 +460,7 @@ wait_time = 2.5
 one_shot = true
 
 [node name="DashLength" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.333
 one_shot = true
 
 [node name="TimeUntilDash" type="Timer" parent="."]
