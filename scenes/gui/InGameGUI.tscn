@@ -834,7 +834,7 @@ theme_override_constants/margin_bottom = 20
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-11, 79)
 scale = Vector2(3.5, 3.5)
-tile_map_data = PackedByteArray("AAACAAkAAAASAAIAAAADAAkAAAASAAMAAAAEAAkAAAATAAMAAAAFAAkAAAAUAAMAAAAJAAkAAAARAAcAAAARAAkAAAAKAAIAAAA=")
+tile_map_data = PackedByteArray("AAACAAkAAAASAAIAAAADAAkAAAASAAMAAAAEAAkAAAATAAMAAAAFAAkAAAAUAAMAAAAJAAkAAAARAAcAAAARAAkAAAAJAAIAAAA=")
 tile_set = SubResource("TileSet_65la6")
 
 [node name="Label" type="Label" parent="."]
