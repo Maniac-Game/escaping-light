@@ -1,30 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://cg7hbefrpognr"]
+[gd_scene load_steps=4 format=3 uid="uid://cg7hbefrpognr"]
 
-[ext_resource type="PackedScene" uid="uid://dvnmetmby5ntk" path="res://scenes/zombie/zombie.tscn" id="1_g8byq"]
-[ext_resource type="PackedScene" uid="uid://bd4e5516x4jok" path="res://scenes/zombie/player_dummy.tscn" id="2_mjwjr"]
+[ext_resource type="Script" path="res://scripts/zombie/zombie_test.gd" id="1_3tk6u"]
+[ext_resource type="PackedScene" uid="uid://b6ajiwhpjsmv" path="res://scenes/player/Player.tscn" id="3_ihllx"]
+[ext_resource type="PackedScene" uid="uid://dvnmetmby5ntk" path="res://scenes/zombie/zombie.tscn" id="3_yh2tb"]
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_3tk6u")
 
-[node name="Zombie" parent="." instance=ExtResource("1_g8byq")]
-position = Vector2(762, 195)
-script = null
+[node name="Zombie" parent="." instance=ExtResource("3_yh2tb")]
+position = Vector2(906, 190)
 
-[node name="Zombie2" parent="." instance=ExtResource("1_g8byq")]
-position = Vector2(844, 440)
-script = null
+[node name="Zombie2" parent="." instance=ExtResource("3_yh2tb")]
+position = Vector2(910, 457)
 
-[node name="Zombie3" parent="." instance=ExtResource("1_g8byq")]
-position = Vector2(565, 128)
-script = null
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Zombie4" parent="." instance=ExtResource("1_g8byq")]
-position = Vector2(640, 517)
-script = null
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
 
-[node name="Zombie5" parent="." instance=ExtResource("1_g8byq")]
-position = Vector2(691, 345)
-script = null
-
-[node name="Player" parent="." instance=ExtResource("2_mjwjr")]
-position = Vector2(362, 322)
-script = null
+[node name="Player" parent="." instance=ExtResource("3_ihllx")]
+position = Vector2(335, 346)

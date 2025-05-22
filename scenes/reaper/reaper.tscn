@@ -579,5 +579,5 @@ stream = ExtResource("12_ihj3y")
 [connection signal="area_exited" from="HitBox" to="." method="_on_hit_box_area_exited"]
 [connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="area_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
-[connection signal="timeout" from="PetrifiedTimer" to="." method="_on_petrification_timer_timeout"]
 [connection signal="timeout" from="PetrifiedTimer" to="." method="_on_flee_timer_timeout"]
+[connection signal="timeout" from="PetrifiedTimer" to="." method="_on_petrification_timer_timeout"]

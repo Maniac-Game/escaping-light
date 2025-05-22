@@ -30,6 +30,7 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0.368627, 0.239216, 1)
@@ -38,6 +39,7 @@ theme_override_font_sizes/font_size = 71
 text = "You found the lights!"
 
 [node name="ReturnToMenu" type="LinkButton" parent="HBoxContainer/VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
