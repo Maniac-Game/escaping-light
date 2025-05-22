@@ -1,3 +1,67 @@
-[gd_scene format=3 uid="uid://bup5uqsi64vt4"]
+[gd_scene load_steps=5 format=3 uid="uid://bup5uqsi64vt4"]
 
-[node name="LoseScreen" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://cdjext86d1w23" path="res://assets/winarealight.png" id="1_i3ino"]
+[ext_resource type="FontFile" uid="uid://1umi1jy32wmp" path="res://assets/Planes_ValMore.ttf" id="2_vhr05"]
+[ext_resource type="Script" path="res://scripts/gui/restart.gd" id="3_c26tl"]
+[ext_resource type="Script" path="res://scripts/gui/return_to_menu.gd" id="4_cqb1a"]
+
+[node name="LoseScreen" type="MarginContainer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0.473975, 0.473976, 0.473976, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(574, 317)
+color = Color(0.589096, 0.589096, 0.589096, 1)
+texture = ExtResource("1_i3ino")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.368627, 0.239216, 1)
+theme_override_fonts/font = ExtResource("2_vhr05")
+theme_override_font_sizes/font_size = 71
+text = "You Died!"
+
+[node name="Restart" type="LinkButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.458405, 0.458405, 0.458405, 1)
+theme_override_colors/font_hover_color = Color(0.737255, 0.737255, 0.737255, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.737193, 0.737193, 0.737193, 1)
+theme_override_fonts/font = ExtResource("2_vhr05")
+theme_override_font_sizes/font_size = 36
+text = "Restart?"
+script = ExtResource("3_c26tl")
+
+[node name="ReturnToMenu" type="LinkButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.458405, 0.458405, 0.458405, 1)
+theme_override_colors/font_hover_color = Color(0.737255, 0.737255, 0.737255, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.737193, 0.737193, 0.737193, 1)
+theme_override_fonts/font = ExtResource("2_vhr05")
+theme_override_font_sizes/font_size = 36
+text = "Return to menu"
+script = ExtResource("4_cqb1a")
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Restart" to="HBoxContainer/VBoxContainer/Restart" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ReturnToMenu" to="HBoxContainer/VBoxContainer/ReturnToMenu" method="_on_pressed"]

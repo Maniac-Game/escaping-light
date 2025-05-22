@@ -1,3 +1,52 @@
-[gd_scene format=3 uid="uid://dqc6haikmo2w2"]
+[gd_scene load_steps=4 format=3 uid="uid://dqc6haikmo2w2"]
 
-[node name="WinScreen" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://cdjext86d1w23" path="res://assets/winarealight.png" id="1_4ak41"]
+[ext_resource type="FontFile" uid="uid://1umi1jy32wmp" path="res://assets/Planes_ValMore.ttf" id="2_t7y6r"]
+[ext_resource type="Script" path="res://scripts/gui/return_to_menu.gd" id="3_hsnqn"]
+
+[node name="WinScreen" type="MarginContainer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0.255659, 0.255659, 0.255659, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(574, 317)
+color = Color(0.589096, 0.589096, 0.589096, 1)
+texture = ExtResource("1_4ak41")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.368627, 0.239216, 1)
+theme_override_fonts/font = ExtResource("2_t7y6r")
+theme_override_font_sizes/font_size = 71
+text = "You found the lights!"
+
+[node name="ReturnToMenu" type="LinkButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.351563, 0.351563, 0.351563, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.162066, 0.162066, 0.162066, 1)
+theme_override_fonts/font = ExtResource("2_t7y6r")
+theme_override_font_sizes/font_size = 36
+text = "Return to menu!"
+script = ExtResource("3_hsnqn")
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ReturnToMenu" to="HBoxContainer/VBoxContainer/ReturnToMenu" method="_on_pressed"]

@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=4 uid="uid://clr2lcrgseeoc"]
+[gd_scene load_steps=10 format=4 uid="uid://clr2lcrgseeoc"]
 
 [ext_resource type="PackedScene" uid="uid://b6ajiwhpjsmv" path="res://scenes/player/Player.tscn" id="1_258ay"]
 [ext_resource type="Script" path="res://scenes/levels/level_1.gd" id="1_chrte"]
 [ext_resource type="TileSet" uid="uid://dae044ds3baoh" path="res://scenes/levels/level_tileset.tres" id="1_e4lup"]
 [ext_resource type="PackedScene" uid="uid://dljnl4e74u0mn" path="res://scenes/reaper/reaper.tscn" id="3_jd12s"]
 [ext_resource type="Texture2D" uid="uid://cdjext86d1w23" path="res://assets/winarealight.png" id="5_0c125"]
+[ext_resource type="PackedScene" uid="uid://bup5uqsi64vt4" path="res://scenes/gui/LoseScreen.tscn" id="6_u8bfl"]
+[ext_resource type="PackedScene" uid="uid://dqc6haikmo2w2" path="res://scenes/gui/WinScreen.tscn" id="7_u5pvq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wwpk"]
 size = Vector2(848, 725)
@@ -16,7 +18,7 @@ size = Vector2(248, 744)
 texture_filter = 1
 script = ExtResource("1_chrte")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="InGameModulator" type="CanvasModulate" parent="."]
 color = Color(0.329158, 0.329159, 0.329158, 1)
 
 [node name="TileMapLayers" type="Node2D" parent="."]
@@ -36,7 +38,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="y-sort" instance=ExtResource("1_258ay")]
 y_sort_enabled = true
-position = Vector2(17725, 9)
+position = Vector2(-507, 3)
 scale = Vector2(1.5, 1.5)
 
 [node name="props" type="TileMapLayer" parent="y-sort"]
@@ -129,5 +131,13 @@ collision_mask = 128
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBlocker"]
 position = Vector2(18076, 24)
 shape = SubResource("RectangleShape2D_quo8v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LoseScreen" parent="CanvasLayer" instance=ExtResource("6_u8bfl")]
+visible = false
+
+[node name="WinScreen" parent="CanvasLayer" instance=ExtResource("7_u5pvq")]
+visible = false
 
 [connection signal="body_entered" from="WinTrigger" to="." method="_on_win_trigger_body_entered"]
