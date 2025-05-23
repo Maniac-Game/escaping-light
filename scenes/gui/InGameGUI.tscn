@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://2wtjr1rpsdli"]
+[gd_scene load_steps=7 format=4 uid="uid://2wtjr1rpsdli"]
 
+[ext_resource type="Script" path="res://scripts/gui/in_game_gui.gd" id="1_6bxmc"]
 [ext_resource type="Texture2D" uid="uid://cyvcbgpcmcy4d" path="res://assets/kenney_inputPromptsPixel16×/Tilemap/tilemap_packed.png" id="1_bq45u"]
 [ext_resource type="FontFile" uid="uid://1umi1jy32wmp" path="res://assets/Planes_ValMore.ttf" id="2_mqcvi"]
+[ext_resource type="PackedScene" uid="uid://dvg8jfdyh2foo" path="res://scenes/gui/hp/Health.tscn" id="3_n5aqe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xxxje"]
 texture = ExtResource("1_bq45u")
@@ -830,6 +832,7 @@ offset_right = 1152.0
 offset_bottom = 648.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_bottom = 20
+script = ExtResource("1_6bxmc")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-11, 79)
@@ -844,3 +847,6 @@ size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("2_mqcvi")
 theme_override_font_sizes/font_size = 24
 text = "MOVE                     SPRINT                 TOGGLE FLASHLIGHT "
+
+[node name="Health" parent="." instance=ExtResource("3_n5aqe")]
+position = Vector2(15, 6)
