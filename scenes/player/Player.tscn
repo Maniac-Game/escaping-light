@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://b6ajiwhpjsmv"]
+[gd_scene load_steps=49 format=3 uid="uid://b6ajiwhpjsmv"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_pcyhf"]
 [ext_resource type="Texture2D" uid="uid://cxwpb1nhavrhi" path="res://assets/player-light.png" id="2_q1h0y"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/player/state_machines/movement_state/sprint.gd" id="7_yg08t"]
 [ext_resource type="Script" path="res://scripts/player/state_machines/movement_state/disabled.gd" id="8_0u4ad"]
 [ext_resource type="Script" path="res://scripts/player/state_machines/movement_state/death.gd" id="9_7ka3a"]
+[ext_resource type="Script" path="res://scripts/player/state_machines/movement_state/knockback.gd" id="10_76lqq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_moc21"]
 size = Vector2(45.3109, 12.5518)
@@ -379,6 +380,11 @@ walk_speed = 200
 
 [node name="Death" type="Node" parent="StateMachine/MovementState" node_paths=PackedStringArray("anim_sprite", "player")]
 script = ExtResource("9_7ka3a")
+anim_sprite = NodePath("../../../Body/AnimatedSprite2D")
+player = NodePath("../../..")
+
+[node name="Knockback" type="Node" parent="StateMachine/MovementState" node_paths=PackedStringArray("anim_sprite", "player")]
+script = ExtResource("10_76lqq")
 anim_sprite = NodePath("../../../Body/AnimatedSprite2D")
 player = NodePath("../../..")
 
