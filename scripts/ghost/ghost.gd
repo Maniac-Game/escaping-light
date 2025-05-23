@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 enum State {IDLE, ATTACK, CHASE, HIT, DEAD}
 
-@export var level = "Level1"
+@export var level = "Level"
 @export var speed = 150.0
 @export var detection_range = 700
 @export var health = 100
@@ -16,9 +16,9 @@ enum State {IDLE, ATTACK, CHASE, HIT, DEAD}
 @onready var bite_sound = $BiteSound
 @onready var hurt_sound = $HurtSound
 @onready var death_sound = $DeathSound
-@onready var player_character = get_node("/root/" + level + "/Player")
-@onready var player_hurtbox = get_node("/root/" + level + "/Player/Hitbox")
-@onready var light = get_node("/root/" + level + "/Player/Body/Flashlight/Light")
+@onready var player_character = get_node("/root/" + level + "/y-sort/Player")
+@onready var player_hurtbox = get_node("/root/" + level + "/y-sort/Player/Hitbox")
+@onready var light = get_node("/root/" + level + "/y-sort/Player/Body/Flashlight/Light")
 
 var current_state = State.IDLE
 var player_pos

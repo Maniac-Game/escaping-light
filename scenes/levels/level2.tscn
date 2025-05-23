@@ -17,7 +17,7 @@ size = Vector2(848, 725)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4q7ow"]
 size = Vector2(248, 744)
 
-[node name="Level2" type="Node2D"]
+[node name="Level" type="Node2D"]
 script = ExtResource("1_vabgj")
 
 [node name="InGameModulator" type="CanvasModulate" parent="."]
