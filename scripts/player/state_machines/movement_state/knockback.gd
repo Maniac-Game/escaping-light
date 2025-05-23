@@ -5,8 +5,9 @@ extends State
 
 func enter() -> void:
 	get_tree().create_timer(0.3).timeout.connect(on_timer_timeout)
-	var knockback_direction = player.global_position - player.enemy.global_position
-	player.velocity = knockback_direction.normalized() * 300
+	if player.enemy != null:
+		var knockback_direction = player.global_position - player.enemy.global_position
+		player.velocity = knockback_direction.normalized() * 300
 	
 func exit() -> void:
 	player.enemy = null
