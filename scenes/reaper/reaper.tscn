@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://dljnl4e74u0mn"]
+[gd_scene load_steps=81 format=3 uid="uid://dljnl4e74u0mn"]
 
 [ext_resource type="Texture2D" uid="uid://g8g6w6mfu3y4" path="res://assets/Animation Sprite Sheets (PNG)/LeftPassiveIdleReaper-Sheet.png" id="1"]
 [ext_resource type="Script" path="res://scripts/reaper/reaper.gd" id="1_qxkvb"]
@@ -494,9 +494,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="OccluderPolygon2D" id="65"]
-polygon = PackedVector2Array(1.86499, -15.5538, 5.89169, -15.1792, 8.70102, -11.4334, 9.26289, -6.18936, 9.0756, -2.34995, 5.51712, 1.20853, 8.2328, 10.3857, 7.67093, 11.9776, 5.98534, 13.7568, 4.2061, 16.1916, 2.23957, 16.0043, 2.14593, 14.0378, -1.41255, 14.0378, -3.56637, 16.098, -5.15832, 16.098, -5.06467, 13.8505, -7.874, 14.9742, -8.7168, 14.9742, -8.7168, 13.2886, -6.65663, 6.26531, -4.50281, 1.39582, -6.93756, -0.289778, -9.93417, -3.19275, -9.93417, -5.34656, -7.68671, -10.1224, -4.22188, -14.0555, -1.22527, -15.1792)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_d68ib"]
 radius = 480.0
 
@@ -523,10 +520,6 @@ position = Vector2(0, 1)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("64")
 animation = &"kill"
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite"]
-visible = false
-occluder = SubResource("65")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11")
