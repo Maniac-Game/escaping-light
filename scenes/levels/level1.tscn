@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=4 uid="uid://clr2lcrgseeoc"]
+[gd_scene load_steps=21 format=4 uid="uid://clr2lcrgseeoc"]
 
 [ext_resource type="PackedScene" uid="uid://b6ajiwhpjsmv" path="res://scenes/player/Player.tscn" id="1_258ay"]
 [ext_resource type="Script" path="res://scenes/levels/level_1.gd" id="1_chrte"]
 [ext_resource type="TileSet" uid="uid://dae044ds3baoh" path="res://scenes/levels/level_tileset.tres" id="1_e4lup"]
+[ext_resource type="PackedScene" uid="uid://cnkqk64joekkr" path="res://scenes/ghost/Ghost.tscn" id="2_je4me"]
 [ext_resource type="PackedScene" uid="uid://dljnl4e74u0mn" path="res://scenes/reaper/reaper.tscn" id="3_jd12s"]
 [ext_resource type="Texture2D" uid="uid://cdjext86d1w23" path="res://assets/winarealight.png" id="5_0c125"]
 [ext_resource type="PackedScene" uid="uid://bup5uqsi64vt4" path="res://scenes/gui/LoseScreen.tscn" id="6_u8bfl"]
@@ -158,6 +159,41 @@ position = Vector2(16465, 58)
 [node name="Reaper14" parent="y-sort/Reapers" instance=ExtResource("3_jd12s")]
 y_sort_enabled = true
 position = Vector2(17401, -2)
+
+[node name="Ghost" parent="y-sort" instance=ExtResource("2_je4me")]
+position = Vector2(9918, 400)
+scale = Vector2(2, 2)
+level = "Level1/y-sort"
+
+[node name="Ghost2" parent="y-sort" instance=ExtResource("2_je4me")]
+position = Vector2(2038, 599)
+scale = Vector2(2, 2)
+level = "Level1/y-sort"
+
+[node name="Ghost3" parent="y-sort" instance=ExtResource("2_je4me")]
+position = Vector2(5295, 616)
+scale = Vector2(2, 2)
+level = "Level1/y-sort"
+
+[node name="Ghost4" parent="y-sort" instance=ExtResource("2_je4me")]
+position = Vector2(7593, -482)
+scale = Vector2(2, 2)
+level = "Level1/y-sort"
+
+[node name="Ghost5" parent="y-sort" instance=ExtResource("2_je4me")]
+position = Vector2(4915, -531)
+scale = Vector2(2, 2)
+level = "Level1/y-sort"
+
+[node name="Ghost6" parent="y-sort" instance=ExtResource("2_je4me")]
+position = Vector2(16944, 448)
+scale = Vector2(2, 2)
+level = "Level1/y-sort"
+
+[node name="Ghost7" parent="y-sort" instance=ExtResource("2_je4me")]
+position = Vector2(5808, -442)
+scale = Vector2(2, 2)
+level = "Level1/y-sort"
 
 [node name="propsOnProps" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)
