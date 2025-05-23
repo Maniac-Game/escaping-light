@@ -23,7 +23,7 @@ func get_health():
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.name == "AttackArea":
-    enemy = area.get_parent()
+		enemy = area.get_parent()
 
 func get_hit():
 		print_debug("Health: ", health)
