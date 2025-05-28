@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://2wtjr1rpsdli"]
+[gd_scene load_steps=9 format=4 uid="uid://2wtjr1rpsdli"]
 
 [ext_resource type="Script" path="res://scripts/gui/in_game_gui.gd" id="1_6bxmc"]
 [ext_resource type="Texture2D" uid="uid://cyvcbgpcmcy4d" path="res://assets/kenney_inputPromptsPixel16×/Tilemap/tilemap_packed.png" id="1_bq45u"]
 [ext_resource type="FontFile" uid="uid://1umi1jy32wmp" path="res://assets/Planes_ValMore.ttf" id="2_mqcvi"]
 [ext_resource type="PackedScene" uid="uid://dvg8jfdyh2foo" path="res://scenes/gui/hp/Health.tscn" id="3_n5aqe"]
+[ext_resource type="PackedScene" uid="uid://eh6wfpm8sbx6" path="res://scenes/gui/stamina/Stamina.tscn" id="5_vhxf0"]
+[ext_resource type="Script" path="res://scripts/gui/stamina/stamina.gd" id="6_ws3av"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xxxje"]
 texture = ExtResource("1_bq45u")
@@ -850,3 +852,7 @@ text = "MOVE                     SPRINT                 TOGGLE FLASHLIGHT "
 
 [node name="Health" parent="." instance=ExtResource("3_n5aqe")]
 position = Vector2(15, 6)
+
+[node name="Stamina" parent="." instance=ExtResource("5_vhxf0")]
+position = Vector2(249, 6)
+script = ExtResource("6_ws3av")

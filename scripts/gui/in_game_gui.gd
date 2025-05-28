@@ -9,3 +9,6 @@ func _process(delta: float) -> void:
 	if player != null:
 		var current_health = player.get_health()
 		$Health.set_health(current_health)
+		
+		var current_stamina = player.get_stamina()
+		$Stamina.set_stamina(current_stamina)
