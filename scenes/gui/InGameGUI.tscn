@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://2wtjr1rpsdli"]
+[gd_scene load_steps=8 format=4 uid="uid://2wtjr1rpsdli"]
 
 [ext_resource type="Script" path="res://scripts/gui/in_game_gui.gd" id="1_6bxmc"]
 [ext_resource type="Texture2D" uid="uid://cyvcbgpcmcy4d" path="res://assets/kenney_inputPromptsPixel16×/Tilemap/tilemap_packed.png" id="1_bq45u"]
 [ext_resource type="FontFile" uid="uid://1umi1jy32wmp" path="res://assets/Planes_ValMore.ttf" id="2_mqcvi"]
 [ext_resource type="PackedScene" uid="uid://dvg8jfdyh2foo" path="res://scenes/gui/hp/Health.tscn" id="3_n5aqe"]
+[ext_resource type="Texture2D" uid="uid://0ispmqeb63i7" path="res://assets/battery-hud.png" id="5_ap6xc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xxxje"]
 texture = ExtResource("1_bq45u")
@@ -850,3 +851,19 @@ text = "MOVE                     SPRINT                 TOGGLE FLASHLIGHT "
 
 [node name="Health" parent="." instance=ExtResource("3_n5aqe")]
 position = Vector2(15, 6)
+
+[node name="BatteryPercentage" type="Node2D" parent="."]
+position = Vector2(705, 264)
+scale = Vector2(2.44, 1)
+
+[node name="ColorRect" type="ColorRect" parent="BatteryPercentage"]
+offset_left = 108.0
+offset_top = -244.0
+offset_right = 171.0
+offset_bottom = -164.0
+color = Color(0.29217, 0.742041, 0.355156, 1)
+
+[node name="Battery" type="Sprite2D" parent="."]
+position = Vector2(1073, 60)
+scale = Vector2(4, 4)
+texture = ExtResource("5_ap6xc")

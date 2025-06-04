@@ -2,6 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 @onready var animation_state_machine: StateMachine = $StateMachine/MovementState
+@onready var light = $Body/Flashlight/Light
+
 @export var health = 100
 @export var stamina = 100
 @onready var enemy: CharacterBody2D = null
@@ -37,3 +39,11 @@ func get_hit():
 			animation_state_machine.on_child_transition(current_state,"death")
 		else:
 			animation_state_machine.on_child_transition(current_state, "knockback")
+
+func add_battery(amount: int):
+	light.battery += amount
+	if light.battery > 100:
+		light.battery = 100
+		
+func get_battery():
+	return light.battery

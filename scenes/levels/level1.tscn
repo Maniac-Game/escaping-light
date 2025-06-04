@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://clr2lcrgseeoc"]
+[gd_scene load_steps=14 format=4 uid="uid://clr2lcrgseeoc"]
 
 [ext_resource type="PackedScene" uid="uid://b6ajiwhpjsmv" path="res://scenes/player/Player.tscn" id="1_258ay"]
 [ext_resource type="Script" path="res://scenes/levels/level_1.gd" id="1_chrte"]
@@ -10,63 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://dqc6haikmo2w2" path="res://scenes/gui/WinScreen.tscn" id="7_u5pvq"]
 [ext_resource type="PackedScene" uid="uid://2wtjr1rpsdli" path="res://scenes/gui/InGameGUI.tscn" id="8_n6q6e"]
 [ext_resource type="AudioStream" uid="uid://bqr3lt81nk2i0" path="res://assets/Deaths Melody.wav" id="9_kecoj"]
-[ext_resource type="Texture2D" uid="uid://c0018jq8d6bnx" path="res://assets/battery.png" id="10_hiarb"]
+[ext_resource type="PackedScene" uid="uid://crrdifctkw8l5" path="res://scenes/gui/battery.tscn" id="12_cxaxs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wwpk"]
 size = Vector2(848, 725)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_quo8v"]
 size = Vector2(248, 744)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xrryq"]
-atlas = ExtResource("10_hiarb")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vhx14"]
-atlas = ExtResource("10_hiarb")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nvft3"]
-atlas = ExtResource("10_hiarb")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j0u2j"]
-atlas = ExtResource("10_hiarb")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4a2i5"]
-atlas = ExtResource("10_hiarb")
-region = Rect2(256, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bgnsl"]
-atlas = ExtResource("10_hiarb")
-region = Rect2(320, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_3rnvp"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xrryq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vhx14")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nvft3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j0u2j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4a2i5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bgnsl")
-}],
-"loop": true,
-"name": &"default",
-"speed": 6.0
-}]
 
 [node name="Level1" type="Node2D"]
 texture_filter = 1
@@ -195,6 +145,24 @@ position = Vector2(5808, -442)
 scale = Vector2(2, 2)
 level = "Level1/y-sort"
 
+[node name="Battery" parent="y-sort" instance=ExtResource("12_cxaxs")]
+position = Vector2(13643, -79)
+
+[node name="Battery2" parent="y-sort" instance=ExtResource("12_cxaxs")]
+position = Vector2(10310, 10)
+
+[node name="Battery3" parent="y-sort" instance=ExtResource("12_cxaxs")]
+position = Vector2(15775, -17)
+
+[node name="Battery4" parent="y-sort" instance=ExtResource("12_cxaxs")]
+position = Vector2(683, 65)
+
+[node name="Battery5" parent="y-sort" instance=ExtResource("12_cxaxs")]
+position = Vector2(6308, -55)
+
+[node name="Battery6" parent="y-sort" instance=ExtResource("12_cxaxs")]
+position = Vector2(3606, -84)
+
 [node name="propsOnProps" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("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")
@@ -235,11 +203,5 @@ metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_kecoj")
-
-[node name="AnimatedBattery" type="AnimatedSprite2D" parent="."]
-position = Vector2(358, 126)
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_3rnvp")
-frame_progress = 0.433841
 
 [connection signal="body_entered" from="WinTrigger" to="." method="_on_win_trigger_body_entered"]

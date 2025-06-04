@@ -9,3 +9,4 @@ func _process(delta: float) -> void:
 	if player != null:
 		var current_health = player.get_health()
 		$Health.set_health(current_health)
+	$BatteryPercentage/ColorRect.size.x = player.get_battery() * 0.63
